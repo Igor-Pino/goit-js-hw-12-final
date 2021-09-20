@@ -57,34 +57,23 @@ function tooManyMatchesNote () {
 
 function onInputChange(e) {
     
-    
-
     const searchQuery = e.target.value;
 
     API.fetchCountryByName(searchQuery)
     
     .then(country => {
         
+        
         clearMarkup()
-
-         if(country.status === 404) return notFoundNote()
 
             if(country.length>1&&country.length<10) return specifyRequestNote(country);
 
              if(country.length>10) return tooManyMatchesNote ();
-             renderCountryCard(country); 
-             
-      
-                    
-                    
-                    
-                    
-            }) 
-        
-    .catch()   
-    
-    .finally(() => {
-    
+             renderCountryCard(country);          
+                                                     
+            })       
+    .catch(notFoundNote)       
+    .finally(() => {    
     })
 }
 
